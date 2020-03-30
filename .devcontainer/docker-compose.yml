@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  devcontainer:
+    image: debian:buster
+
+    volumes:
+      - ..:/workspace:cached
+
+      # this works
+      - ~:/home-bind-simple:cached
+
+      # this doesn't
+      - type: bind
+        source: "~"
+        target: /home-bind-extended
+        consistency: cached
+
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sleep infinity 
+    
